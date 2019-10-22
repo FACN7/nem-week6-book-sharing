@@ -38,24 +38,24 @@ function updateBooksListDom(err, data) {
         header.innerText = "This book is available!";
         availability.appendChild(header);
         var bookingForm = document.createElement("form");
-        bookingForm.class = "booking-form";
+        bookingForm.className = "booking-form";
         bookingForm.method = "post";
         bookingForm.action = "/add-booking";
         var inputUser = document.createElement("input");
         inputUser.type = "text";
         inputUser.name = "username";
         inputUser.placeholder = "your name";
-        bookingForm.appendChild(inputUser);
         var inputDate = document.createElement("input");
         inputDate.type = "date";
         inputDate.name = "return-date";
         inputDate.placeholder = "return date";
-        bookingForm.appendChild(inputDate);
         var submitBooking = document.createElement("button");
         submitBooking.type = "submit";
         submitBooking.name = "submit-booking";
         submitBooking.innerText = "I book!";
-        submitBooking.appendChild(inputDate);
+        bookingForm.appendChild(inputUser);
+        bookingForm.appendChild(inputDate);
+        bookingForm.appendChild(submitBooking);
         availability.appendChild(bookingForm);
       } else {
         availability.innerText = "Sorry! The book is not available!";
