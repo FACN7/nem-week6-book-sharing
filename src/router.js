@@ -1,6 +1,6 @@
 const {
     homeHandler,
-    getUsersHandler,
+    getAllBooks,
     publicHandler,
     errorHandler
 } = require('./handlers');
@@ -10,8 +10,8 @@ const router = (request, response) => {
 
     if (url === '/') {
         homeHandler(response);
-    } else if (url === '/users') {
-        getUsersHandler(response);
+    } else if (url === '/books') {
+        getAllBooks(response);
     } else if (url.includes('public')) {
         publicHandler(url, response);
     } else {
