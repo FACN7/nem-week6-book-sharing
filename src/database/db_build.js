@@ -1,21 +1,22 @@
 const fs = require('fs');
+const path = require('path');
 
-const buildDatabase = () => {
-    const connection = require('./db_connection');
-    const sql = fs.readFileSync(`${__dirname}/db_build.sql`).toString();
+const dbConnection = require('./db_connection.js');
 
-    connection.query(sql, (err, result) => {
-        if (err) {
-            console.log(err, "error");
-        } else {
-            console.log("database created");
-            connection.end(() => {
-                console.log('connection closed')
-            })
-        }
-    });
-};
+const sqlPath = path.join(__dirname, 'db_build.sql');
+const sql = fs.readFileSync(sqlPath).toString();
 
-buildDatabase();
-
-module.exports = buildDatabase;
+// const runDbBuild = cb => {dbConnection.query(sql, cb)
+// console.log("abc")
+// }
+// module.exports = runDbBuild
+dbConnection.query(sql, (err, result) => {
+    if (err) {
+      console.log(err, "error");
+    } else {
+      console.log("database created");
+      dbConnection.end(() => {
+        console.log('connection closed')
+      })
+    }
+  });
