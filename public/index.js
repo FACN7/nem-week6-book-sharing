@@ -1,11 +1,16 @@
 function request(url, cb) {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      cb(null, xhr.responseText);
-    } else {
-      cb("error" + xhr.responseType);
-    }
+    // console.log("state :",xhr.readyState ,"\nstatus",xhr.status);
+
+      if(xhr.readyState === 4 ){
+        if(xhr.status === 200){
+          cb(null, xhr.responseText);
+        }else{
+          cb("error" + xhr.responseType);
+
+        }
+      }
   };
   xhr.open("GET", url, true);
   xhr.send();
@@ -13,7 +18,7 @@ function request(url, cb) {
 
 function updateBooksListDom(err, data) {
   if (err) {
-    console.log(err);
+    console.log("error:",err);
   } else {
     var books = JSON.parse(data);
     var table = document.getElementById("users-table");
