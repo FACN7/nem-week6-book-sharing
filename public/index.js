@@ -1,10 +1,12 @@
 function request(url, cb) {
   var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      cb(null, xhr.responseText);
-    } else {
-      cb("error" + xhr.responseType);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        cb(null, xhr.responseText);
+      } else {
+        cb("error" + xhr.responseType);
+      }
     }
   };
   xhr.open("GET", url, true);
@@ -17,7 +19,7 @@ function updateBooksListDom(err, data) {
   } else {
     var books = JSON.parse(data);
     var table = document.getElementById("users-table");
-    books.forEach(function(book) {
+    books.forEach(function (book) {
       var row = document.createElement("tr");
       // compare to DB
       row.id = "row-" + book.title;
