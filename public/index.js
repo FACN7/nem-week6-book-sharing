@@ -58,7 +58,14 @@ function updateBooksListDom(err, data) {
         bookingForm.appendChild(submitBooking);
         availability.appendChild(bookingForm);
       } else {
-        availability.innerText = "Sorry! The book is not available!";
+        var header = document.createElement("div");
+        header.innerText = "Sorry! The book is not available!";
+        var submitReturn = document.createElement("button");
+        submitReturn.type = "submit";
+        submitReturn.name = "submit-return";
+        submitReturn.innerText = "I returned the book";
+        availability.appendChild(header);
+        availability.appendChild(submitReturn);
       }
 
       row.appendChild(availability);
