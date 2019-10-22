@@ -15,7 +15,7 @@ function request(url, cb) {
 
 function updateBooksListDom(err, data) {
   if (err) {
-    console.log(err);
+    console.log("error:",err);
   } else {
     var books = JSON.parse(data);
     var table = document.getElementById("users-table");
