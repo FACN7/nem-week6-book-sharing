@@ -1,0 +1,28 @@
+{
+  "name": "nem-week6-book-sharing",
+  "version": "1.0.0",
+  "description": "## TO DO:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FACN7/nem-week6-book-sharing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FACN7/nem-week6-book-sharing/issues"
+  },
+  "homepage": "https://github.com/FACN7/nem-week6-book-sharing#readme",
+  "dependencies": {
+    "env2": "^2.2.2",
+    "nodemon": "^1.19.4",
+    "pg": "^7.12.1",
+    "url": "^0.11.0"
+  }
+}
