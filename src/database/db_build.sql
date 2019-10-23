@@ -22,7 +22,7 @@ CREATE TABLE books (
     start_time DATE,
     end_time DATE,
     FOREIGN KEY (book_id) REFERENCES books (isnb),
-    FOREIGN KEY (student_id) REFERENCES students (id)   
+    FOREIGN KEY (student_id) REFERENCES students (id)
 
     );
 
@@ -43,7 +43,7 @@ VALUES(4,'Faris Abotayea');
 INSERT INTO borrowing (book_id,student_id,start_time,end_time)
 VALUES (2,1,'2019-09-11','2019-09-14');
 INSERT INTO borrowing (book_id,student_id,start_time,end_time)
-VALUES (3,2,'2019-09-11','2019-09-20');
+VALUES (3,2,'2019-09-11','2019-11-20');
 
 
 COMMIT;

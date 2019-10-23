@@ -18,7 +18,7 @@ function updateBooksListDom(err, data) {
     console.log("error:",err);
   } else {
     var books = JSON.parse(data);
-    var table = document.getElementById("users-table");
+    var table = document.getElementById("books-table");
     books.forEach(function(book) {
       var row = document.createElement("tr");
       row.id = "row-" + book.title;
@@ -34,31 +34,40 @@ function updateBooksListDom(err, data) {
       // AVAILABILITY BLOCK
 
       if (book.availability === "available") {
+        row.className = "available";
         var header = document.createElement("div");
         header.innerText = "This book is available!";
         availability.appendChild(header);
         var bookingForm = document.createElement("form");
-        bookingForm.class = "booking-form";
+        bookingForm.className = "booking-form";
         bookingForm.method = "post";
         bookingForm.action = "/add-booking";
         var inputUser = document.createElement("input");
         inputUser.type = "text";
         inputUser.name = "username";
         inputUser.placeholder = "your name";
-        bookingForm.appendChild(inputUser);
         var inputDate = document.createElement("input");
         inputDate.type = "date";
         inputDate.name = "return-date";
         inputDate.placeholder = "return date";
-        bookingForm.appendChild(inputDate);
         var submitBooking = document.createElement("button");
         submitBooking.type = "submit";
         submitBooking.name = "submit-booking";
         submitBooking.innerText = "I book!";
-        submitBooking.appendChild(inputDate);
+        bookingForm.appendChild(inputUser);
+        bookingForm.appendChild(inputDate);
+        bookingForm.appendChild(submitBooking);
         availability.appendChild(bookingForm);
       } else {
-        availability.innerText = "Sorry! The book is not available!";
+        row.className = "unavailable";
+        var header = document.createElement("div");
+        header.innerText = "Sorry! The book is not available!";
+        var submitReturn = document.createElement("button");
+        submitReturn.type = "submit";
+        submitReturn.name = "submit-return";
+        submitReturn.innerText = "I returned the book";
+        availability.appendChild(header);
+        availability.appendChild(submitReturn);
       }
 
       row.appendChild(availability);
@@ -66,43 +75,5 @@ function updateBooksListDom(err, data) {
     });
   }
 }
-
-// function updateBookingsStatus(err, data) {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     var status = JSON.parse(data);
-//     status.forEach(function(book) {
-//       var statusCell = document.getElementById("status-" + book.title);
-//       if (book.availability === "available") {
-//         var header = document.createElement("div");
-//         header.innerText = "This book is available!";
-//         statusCell.appendChild(header);
-//         var bookingForm = document.createElement("form");
-//         bookingForm.class = "booking-form";
-//         bookingForm.method = "post";
-//         bookingForm.action = "/add-booking";
-//         var inputUser = document.createElement("input");
-//         inputUser.type = "text";
-//         inputUser.name = "username";
-//         inputUser.placeholder = "your name";
-//         bookingForm.appendChild(inputUser);
-//         var inputDate = document.createElement("input");
-//         inputDate.type = "date";
-//         inputDate.name = "return-date";
-//         inputDate.placeholder = "return date";
-//         bookingForm.appendChild(inputDate);
-//         var submitBooking = document.createElement("button");
-//         submitBooking.type = "submit";
-//         submitBooking.name = "submit-booking";
-//         submitBooking.innerText = "I book!";
-//         submitBooking.appendChild(inputDate);
-//         statusCell.appendChild(bookingForm);
-//       } else {
-//         statusCell.innerText = "Sorry! The book is not available!";
-//       }
-//     });
-//   }
-// }
 
 request("/books", updateBooksListDom);
