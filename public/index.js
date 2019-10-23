@@ -15,7 +15,7 @@ function request(url, cb) {
 
 function updateBooksListDom(err, data) {
   if (err) {
-    console.log("error:",err);
+    console.log("error:", err);
   } else {
     var books = JSON.parse(data);
     var table = document.getElementById("books-table");
@@ -44,8 +44,8 @@ function updateBooksListDom(err, data) {
         bookingForm.action = "/add-booking";
         var inputUser = document.createElement("input");
         inputUser.type = "text";
-        inputUser.name = "username";
-        inputUser.placeholder = "your name";
+        inputUser.name = "student_id";
+        inputUser.placeholder = "student id";
         var inputDate = document.createElement("input");
         inputDate.type = "date";
         inputDate.name = "return-date";
@@ -75,5 +75,40 @@ function updateBooksListDom(err, data) {
     });
   }
 }
+
+function returnFiltered(err, data) {
+  var string = input.value;
+  console.log(string);
+  if (err) {
+    console.log("error:", err);
+  } else {
+    var books = JSON.parse(data);
+    // console.log(books);
+    var filtered = filterArr(string, books);
+    console.log("filteredARr", filtered);
+    var stringify = JSON.stringify(filtered);
+    updateBooksListDom(err, stringify);
+  }
+}
+
+const filterArr = (str, arr) => {
+  return arr.filter(e => {
+    var ltitle = e.title.toLowerCase();
+    str = str.toLowerCase();
+    return ltitle.includes(str);
+  });
+};
+
+const filteredRequest = () => {
+  request("/books", returnFiltered);
+};
+
+var search = document.getElementById("search_button");
+
+var input = document.getElementById("search_input");
+search.addEventListener("click", function(e) {
+  request("/books", returnFiltered);
+  e.preventDefault();
+});
 
 request("/books", updateBooksListDom);
