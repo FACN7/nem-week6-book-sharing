@@ -1,22 +1,26 @@
 const {
-    homeHandler,
-    getAllBooks,
-    publicHandler,
-    errorHandler
-} = require('./handlers');
+  homeHandler,
+  getAllBooks,
+  publicHandler,
+  errorHandler,
+  donateABook
+} = require("./handlers");
+// const fs = require("fs");
 
 const router = (request, response) => {
-    const { url } = request;
+  const { url } = request;
 
-    if (url === '/') {
-        homeHandler(response);
-    } else if (url === '/books') {
-        getAllBooks(response);
-    } else if (url.includes('public')) {
-        publicHandler(url, response);
-    } else {
-        errorHandler(response);
-    }
+  if (url === "/") {
+    homeHandler(response);
+  } else if (url === "/books") {
+    getAllBooks(response);
+  } else if (url.includes("public")) {
+    publicHandler(url, response);
+  } else if (url === "/add-book") {
+    donateABook(request, response);
+  } else {
+    errorHandler(response);
+  }
 };
 
 module.exports = router;
