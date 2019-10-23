@@ -1,6 +1,6 @@
 function request(url, cb) {
   var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         cb(null, xhr.responseText);
@@ -15,11 +15,11 @@ function request(url, cb) {
 
 function updateBooksListDom(err, data) {
   if (err) {
-    console.log("error:",err);
+    console.log("error:", err);
   } else {
     var books = JSON.parse(data);
     var table = document.getElementById("books-table");
-    books.forEach(function(book) {
+    books.forEach(function (book) {
       var row = document.createElement("tr");
       row.id = "row-" + book.title;
       var title = document.createElement("td");
@@ -44,8 +44,8 @@ function updateBooksListDom(err, data) {
         bookingForm.action = "/add-booking";
         var inputUser = document.createElement("input");
         inputUser.type = "text";
-        inputUser.name = "username";
-        inputUser.placeholder = "your name";
+        inputUser.name = "student_id";
+        inputUser.placeholder = "student_id";
         var inputDate = document.createElement("input");
         inputDate.type = "date";
         inputDate.name = "return-date";
