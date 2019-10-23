@@ -1,6 +1,6 @@
 const dbConnection = require("../database/db_connection");
 
-const insertNewBorrow = cb => {
+const insertNewBorrow = (book_id, student_id, start_time, end_time, cb) => {
     var start_time = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
