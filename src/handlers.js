@@ -6,6 +6,8 @@ const path = require("path");
 const queryString = require("querystring");
 const getData = require("./queries/borrow_q");
 const addBook = require("./queries/add_book_q");
+const insertNewBorrow = require("./queries/insert_new_borrow");
+const returnBook = require("./queries/return_book");
 
 //const users = require('./static');
 
@@ -62,6 +64,65 @@ const donateABook = (request, response) => {
   });
 };
 
+const returnBookHandler = (request, response) => {
+  let data = "";
+  request.on("data", function(chunk) {
+    data += chunk;
+  });
+  request.on("end", () => {
+    console.log(queryString.parse(data));
+    const book_id = queryString.parse(data).book_id;
+    returnBook(book_id, (err, res) => {
+      if (err) {
+        response.writeHead(500, "Content-Type: text/html");
+        response.end("<h1>Sorry, there was a problem returning that book</h1>");
+        console.log(err);
+      } else {
+        response.writeHead(200, { "Content-Type": "text/html" });
+        fs.readFile(__dirname + "/../public/index.html", function(error, file) {
+          if (error) {
+            console.log(error);
+            return;
+          } else {
+            response.end(file);
+          }
+        });
+      }
+    });
+  });
+};
+
+const borrowBook = (request, response) => {
+  let data = "";
+  request.on("data", function(chunk) {
+    data += chunk;
+  });
+  request.on("end", () => {
+    console.log(queryString.parse(data));
+    const book_id = queryString.parse(data).book_id;
+    const student_id = queryString.parse(data).student_id;
+    const start_time = queryString.parse(data).start_time;
+    const end_time = queryString.parse(data).end_time;
+    insertNewBorrow(book_id, student_id, start_time, end_time, (err, res) => {
+      if (err) {
+        response.writeHead(500, "Content-Type: text/html");
+        response.end("<h1>Sorry, there was a problem adding that book</h1>");
+        console.log(err);
+      } else {
+        response.writeHead(200, { "Content-Type": "text/html" });
+        fs.readFile(__dirname + "/../public/index.html", function(error, file) {
+          if (error) {
+            console.log(error);
+            return;
+          } else {
+            response.end(file);
+          }
+        });
+      }
+    });
+  });
+};
+
 const publicHandler = (url, response) => {
   const filepath = path.join(__dirname, "..", url);
   readFile(filepath, (err, file) => {
@@ -88,5 +149,7 @@ module.exports = {
   getAllBooks,
   publicHandler,
   errorHandler,
-  donateABook
+  donateABook,
+  borrowBook,
+  returnBookHandler
 };

@@ -3,7 +3,9 @@ const {
   getAllBooks,
   publicHandler,
   errorHandler,
-  donateABook
+  donateABook,
+  borrowBook,
+  returnBookHandler
 } = require("./handlers");
 // const fs = require("fs");
 
@@ -18,6 +20,10 @@ const router = (request, response) => {
     publicHandler(url, response);
   } else if (url === "/add-book") {
     donateABook(request, response);
+  } else if (url === "/add-booking") {
+    borrowBook(request, response);
+  } else if (url === "/return-book") {
+    returnBookHandler(request, response);
   } else {
     errorHandler(response);
   }
