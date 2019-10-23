@@ -45,7 +45,7 @@ function updateBooksListDom(err, data) {
         var inputUser = document.createElement("input");
         inputUser.type = "text";
         inputUser.name = "student_id";
-        inputUser.placeholder = "student id";
+        inputUser.placeholder = "student_id";
         var inputDate = document.createElement("input");
         inputDate.type = "date";
         inputDate.name = "return-date";
@@ -66,6 +66,7 @@ function updateBooksListDom(err, data) {
         submitReturn.type = "submit";
         submitReturn.name = "submit-return";
         submitReturn.innerText = "I returned the book";
+        submitReturn.setAttribute("name", `${book.isnb}`);
         availability.appendChild(header);
         availability.appendChild(submitReturn);
       }
