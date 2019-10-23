@@ -77,4 +77,22 @@ function updateBooksListDom(err, data) {
   }
 }
 
+document.getElementById('search').addEventListener('click', function (e) {
+  e.preventDefault();
+  var value = document.getElementById('title_input').value;
+  var tr = document.querySelectorAll('tr');
+
+  for (var i = 1; i < tr.length; i++) {
+    if (!tr[i].firstChild.innerHTML.includes(value)) {
+      // console.log(tr[i].firstChild.innerHTML);
+      tr[i].style.display = 'none';
+    } else {
+      tr[i].style.display = 'table-row';
+    }
+
+    //console.log(tr[i].firstChild.innerHTML);
+  }
+  // console.log(tr[1].firstChild.innerHTML);
+})
+
 request("/books", updateBooksListDom);
