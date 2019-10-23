@@ -66,6 +66,7 @@ function updateBooksListDom(err, data) {
         submitReturn.type = "submit";
         submitReturn.name = "submit-return";
         submitReturn.innerText = "I returned the book";
+        submitReturn.setAttribute("name", `${book.isnb}`);
         availability.appendChild(header);
         availability.appendChild(submitReturn);
       }
