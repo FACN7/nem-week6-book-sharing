@@ -1,6 +1,8 @@
 # FACN7 Book Sharing
 ## A group project for Founders and Coders Nazareth, week 6
 
+Link to [Heroku](https://nem-week6-book-sharing.herokuapp.com/)
+
 ### `how to install`
 
 You can clone the repo by typing the command
