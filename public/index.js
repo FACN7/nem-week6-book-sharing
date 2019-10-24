@@ -1,6 +1,6 @@
 function request(url, cb) {
   var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
+  xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         cb(null, xhr.responseText);
@@ -21,7 +21,7 @@ function updateBooksListDom(err, data) {
       .sort(dynamicSort("title"))
       .sort(dynamicSort("availability"));
     var table = document.getElementById("books-table");
-    books.forEach(function(book) {
+    books.forEach(function (book) {
       var row = document.createElement("tr");
       row.id = "row-" + book.title;
       var title = document.createElement("td");
@@ -97,40 +97,57 @@ function updateBooksListDom(err, data) {
   }
 }
 
-function returnFiltered(err, data) {
-  var string = input.value;
-  console.log(string);
-  if (err) {
-    console.log("error:", err);
-  } else {
-    var books = JSON.parse(data);
-    // console.log(books);
-    var filtered = filterArr(string, books);
-    console.log("filteredARr", filtered);
-    var stringify = JSON.stringify(filtered);
-    updateBooksListDom(err, stringify);
-  }
-}
-
-const filterArr = (str, arr) => {
-  return arr.filter(e => {
-    var ltitle = e.title.toLowerCase();
-    str = str.toLowerCase();
-    return ltitle.includes(str);
-  });
-};
-
-const filteredRequest = () => {
-  request("/books", returnFiltered);
-};
-
-var search = document.getElementById("search_button");
-
-var input = document.getElementById("search_input");
-search.addEventListener("click", function(e) {
-  request("/books", returnFiltered);
+document.getElementById('search').addEventListener('click', function (e) {
   e.preventDefault();
+  var value = document.getElementById('search_title_input').value;
+  var tr = document.querySelectorAll('tr');
+
+  for (var i = 1; i < tr.length; i++) {
+    if (!tr[i].firstChild.innerHTML.includes(value)) {
+      // console.log(tr[i].firstChild.innerHTML);
+      tr[i].style.display = 'none';
+    } else {
+      tr[i].style.display = 'table-row';
+    }
+
+    //console.log(tr[i].firstChild.innerHTML);
+  }
+  // console.log(tr[1].firstChild.innerHTML);
 });
+// function returnFiltered(err, data) {
+//   var string = input.value;
+//   console.log(string);
+//   if (err) {
+//     console.log("error:", err);
+//   } else {
+//     var books = JSON.parse(data);
+//     // console.log(books);
+//     var filtered = filterArr(string, books);
+//     console.log("filteredARr", filtered);
+//     var stringify = JSON.stringify(filtered);
+//     updateBooksListDom(err, stringify);
+//   }
+// }
+
+// const filterArr = (str, arr) => {
+//   return arr.filter(e => {
+//     var ltitle = e.title.toLowerCase();
+//     str = str.toLowerCase();
+//     return ltitle.includes(str);
+//   });
+// };
+
+// const filteredRequest = () => {
+//   request("/books", returnFiltered);
+// };
+
+// var search = document.getElementById("search_button");
+
+// var input = document.getElementById("search_input");
+// search.addEventListener("click", function(e) {
+//   request("/books", returnFiltered);
+//   e.preventDefault();
+// });
 
 // THIS IS A SORTING FUNCTION
 
