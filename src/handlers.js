@@ -36,7 +36,7 @@ const getAllBooks = response => {
 
 const donateABook = (request, response) => {
   let data = "";
-  request.on("data", function(chunk) {
+  request.on("data", function (chunk) {
     data += chunk;
   });
   request.on("end", () => {
@@ -49,7 +49,7 @@ const donateABook = (request, response) => {
         console.log(err);
       } else {
         response.writeHead(200, { "Content-Type": "text/html" });
-        fs.readFile(__dirname + "/../public/index.html", function(error, file) {
+        fs.readFile(__dirname + "/../public/index.html", function (error, file) {
           if (error) {
             throw new Error("We have an error:", err);
             return;
@@ -64,7 +64,7 @@ const donateABook = (request, response) => {
 
 const returnBookHandler = (request, response) => {
   let data = "";
-  request.on("data", function(chunk) {
+  request.on("data", function (chunk) {
     data += chunk;
   });
   request.on("end", () => {
@@ -77,7 +77,7 @@ const returnBookHandler = (request, response) => {
         console.log(err);
       } else {
         response.writeHead(200, { "Content-Type": "text/html" });
-        fs.readFile(__dirname + "/../public/index.html", function(error, file) {
+        fs.readFile(__dirname + "/../public/index.html", function (error, file) {
           if (error) {
             throw new Error("We have an error:", err);
             return;
@@ -92,23 +92,23 @@ const returnBookHandler = (request, response) => {
 
 const borrowBook = (request, response) => {
   let data = "";
-  request.on("data", function(chunk) {
+  request.on("data", function (chunk) {
     data += chunk;
   });
   request.on("end", () => {
     console.log(queryString.parse(data));
     const book_id = queryString.parse(data).book_id;
     const student_id = queryString.parse(data).student_id;
-    const start_time = queryString.parse(data).start_time;
+    //const start_time = queryString.parse(data).start_time;
     const end_time = queryString.parse(data).end_time;
-    insertNewBorrow(book_id, student_id, start_time, end_time, (err, res) => {
+    insertNewBorrow(book_id, student_id, end_time, (err, res) => {
       if (err) {
         response.writeHead(500, "Content-Type: text/html");
         response.end("<h1>Sorry, there was a problem adding that book</h1>");
         console.log(err);
       } else {
         response.writeHead(200, { "Content-Type": "text/html" });
-        fs.readFile(__dirname + "/../public/index.html", function(error, file) {
+        fs.readFile(__dirname + "/../public/index.html", function (error, file) {
           if (error) {
             throw new Error("We have an error:", err);
             return;

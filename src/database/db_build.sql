@@ -1,11 +1,7 @@
 BEGIN;
 
-    DROP TABLE IF EXISTS books
+    DROP TABLE IF EXISTS books,students,borrowing
     CASCADE;
-DROP TABLE IF EXISTS students
-CASCADE;
-DROP TABLE IF EXISTS borrowing
-CASCADE;
 
 
 CREATE TABLE books
@@ -25,7 +21,7 @@ CREATE TABLE borrowing
 (
     book_id int NOT NULL,
     student_id int NOT NULL,
-    start_time DATE,
+    start_time DATE not null default CURRENT_DATE,
     end_time DATE,
     FOREIGN KEY (book_id) REFERENCES books (isnb),
     FOREIGN KEY (student_id) REFERENCES students (id)
@@ -37,33 +33,33 @@ INSERT INTO books
 VALUES
     ('harry potter', 'i dont know');
 INSERT INTO books
-    (isnb, title, author)
+    (title, author)
 VALUES
     ('men under the sun', 'najeeb mahfood');
 INSERT INTO books
-    (isnb, title, author)
+    (title, author)
 VALUES
     ('haifa return', 'najeeb mahfood');
 INSERT INTO students
-    (id, fullname)
+    (fullname)
 VALUES('Ebraheem Abbas');
 INSERT INTO students
-    (id, fullname)
+    (fullname)
 VALUES('Natalia Filippova');
 INSERT INTO students
-    (id, fullname)
+    (fullname)
 VALUES('Moses Corcias');
 INSERT INTO students
-    (id, fullname)
+    (fullname)
 VALUES('Faris Abotayea');
 INSERT INTO borrowing
-    (book_id,student_id,start_time,end_time)
+    (book_id,student_id,end_time)
 VALUES
-    (2, 1, '2019-09-11', '2019-09-14');
+    (2, 1, '2019-09-14');
 INSERT INTO borrowing
-    (book_id,student_id,start_time,end_time)
+    (book_id,student_id,end_time)
 VALUES
-    (3, 2, '2019-09-11', '2019-11-20');
+    (3, 2, '2019-11-20');
 
 
 COMMIT;
