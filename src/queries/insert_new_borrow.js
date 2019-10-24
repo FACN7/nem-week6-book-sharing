@@ -12,7 +12,6 @@ const insertNewBorrow = (book_id, student_id, start_time, end_time, cb) => {
     [book_id, student_id, today, end_time],
     (err, res) => {
       if (err) return cb(err);
-      console.log("res.rows=:", res.rows);
       cb(null, res.rows);
     }
   );
