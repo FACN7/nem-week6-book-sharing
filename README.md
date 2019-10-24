@@ -2,6 +2,7 @@
 ## A group project for Founders and Coders Nazareth, week 6
 
 Link to [Heroku](https://nem-week6-book-sharing.herokuapp.com/)
+Link to our [schema](https://dbdiagram.io/d/5db1851602e6e93440f29672)
 
 ### `how to install`
 
