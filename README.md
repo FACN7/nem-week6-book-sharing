@@ -1,6 +1,35 @@
-# nim-week6-book-sharing
+# FACN7 Book Sharing
+## A group project for Founders and Coders Nazareth, week 6
 
-## TO DO:
+### `how to install`
+
+You can clone the repo by typing the command
+
+```console
+> git clone https://github.com/FACN7/nem-week6-book-sharing.git
+> cd nem-week6-book-sharing
+> npm i
+> google-chrome index.html
+```
+### `how to test`
+
+(WHEN WE HAVE TESTS HAHA)
+
+Install tape and tap-spec
+
+```console
+> npm i tape -D
+> npm i tap-spec -D
+```
+
+Run the test command
+
+```console
+> npm test
+```
+
+
+## our process:
 
 * Set up project architecture
 * Set up a server
@@ -9,7 +38,6 @@
 * Display the list of books from DB in DOM (+availability)
 * Add search by title
 * Add a book on client side
-* Add a user on client side (optional)
 * Borrow  - return mechanics 
 * CSS
 * Tests
