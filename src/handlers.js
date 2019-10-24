@@ -9,8 +9,6 @@ const addBook = require("./queries/add_book_q");
 const insertNewBorrow = require("./queries/insert_new_borrow");
 const returnBook = require("./queries/return_book");
 
-//const users = require('./static');
-
 const serverError = (err, response) => {
   response.writeHead(500, "Content-Type:text/html");
   response.end("<h1>Sorry, there was a problem loading the homepage</h1>");
@@ -53,7 +51,7 @@ const donateABook = (request, response) => {
         response.writeHead(200, { "Content-Type": "text/html" });
         fs.readFile(__dirname + "/../public/index.html", function(error, file) {
           if (error) {
-            console.log(error);
+            throw new Error("We have an error:", err);
             return;
           } else {
             response.end(file);
@@ -81,7 +79,7 @@ const returnBookHandler = (request, response) => {
         response.writeHead(200, { "Content-Type": "text/html" });
         fs.readFile(__dirname + "/../public/index.html", function(error, file) {
           if (error) {
-            console.log(error);
+            throw new Error("We have an error:", err);
             return;
           } else {
             response.end(file);
@@ -112,7 +110,7 @@ const borrowBook = (request, response) => {
         response.writeHead(200, { "Content-Type": "text/html" });
         fs.readFile(__dirname + "/../public/index.html", function(error, file) {
           if (error) {
-            console.log(error);
+            throw new Error("We have an error:", err);
             return;
           } else {
             response.end(file);

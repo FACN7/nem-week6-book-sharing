@@ -7,7 +7,6 @@ const {
   borrowBook,
   returnBookHandler
 } = require("./handlers");
-// const fs = require("fs");
 
 const router = (request, response) => {
   const { url } = request;
