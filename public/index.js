@@ -79,7 +79,7 @@ function updateBooksListDom(err, data) {
 
 document.getElementById('search').addEventListener('click', function (e) {
   e.preventDefault();
-  var value = document.getElementById('title_input').value;
+  var value = document.getElementById('search_title_input').value;
   var tr = document.querySelectorAll('tr');
 
   for (var i = 1; i < tr.length; i++) {
@@ -93,6 +93,40 @@ document.getElementById('search').addEventListener('click', function (e) {
     //console.log(tr[i].firstChild.innerHTML);
   }
   // console.log(tr[1].firstChild.innerHTML);
-})
+});
+// function returnFiltered(err, data) {
+//   var string = input.value;
+//   console.log(string);
+//   if (err) {
+//     console.log("error:", err);
+//   } else {
+//     var books = JSON.parse(data);
+//     // console.log(books);
+//     var filtered = filterArr(string, books);
+//     console.log("filteredARr", filtered);
+//     var stringify = JSON.stringify(filtered);
+//     updateBooksListDom(err, stringify);
+//   }
+// }
+
+// const filterArr = (str, arr) => {
+//   return arr.filter(e => {
+//     var ltitle = e.title.toLowerCase();
+//     str = str.toLowerCase();
+//     return ltitle.includes(str);
+//   });
+// };
+
+// const filteredRequest = () => {
+//   request("/books", returnFiltered);
+// };
+
+// var search = document.getElementById("search_button");
+
+// var input = document.getElementById("search_input");
+// search.addEventListener("click", function(e) {
+//   request("/books", returnFiltered);
+//   e.preventDefault();
+// });
 
 request("/books", updateBooksListDom);
