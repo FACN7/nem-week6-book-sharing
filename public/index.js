@@ -17,7 +17,9 @@ function updateBooksListDom(err, data) {
   if (err) {
     console.log("error:", err);
   } else {
-    var books = JSON.parse(data);
+    var books = JSON.parse(data)
+      .sort(dynamicSort("title"))
+      .sort(dynamicSort("availability"));
     var table = document.getElementById("books-table");
     books.forEach(function(book) {
       var row = document.createElement("tr");
@@ -48,27 +50,45 @@ function updateBooksListDom(err, data) {
         inputUser.placeholder = "student_id";
         var inputDate = document.createElement("input");
         inputDate.type = "date";
-        inputDate.name = "return-date";
+        inputDate.name = "end_time";
         inputDate.placeholder = "return date";
+        var inputID = document.createElement("input");
+        inputID.type = "text";
+        inputID.name = "book_id";
+        inputID.value = `${book.isnb}`;
+        inputID.style = "display:none";
         var submitBooking = document.createElement("button");
         submitBooking.type = "submit";
         submitBooking.name = "submit-booking";
         submitBooking.innerText = "I book!";
         bookingForm.appendChild(inputUser);
         bookingForm.appendChild(inputDate);
+        bookingForm.appendChild(inputID);
         bookingForm.appendChild(submitBooking);
         availability.appendChild(bookingForm);
       } else {
+        // HERE WE RETURN A BOOK
         row.className = "unavailable";
         var header = document.createElement("div");
         header.innerText = "Sorry! The book is not available!";
+        var returnForm = document.createElement("form");
+        returnForm.className = "return-form";
+        returnForm.method = "post";
+        returnForm.action = "/return-book";
+        var inputID = document.createElement("input");
+        inputID.type = "text";
+        inputID.name = "book_id";
+        inputID.value = `${book.isnb}`;
+        inputID.style = "display:none";
         var submitReturn = document.createElement("button");
         submitReturn.type = "submit";
         submitReturn.name = "submit-return";
         submitReturn.innerText = "I returned the book";
-        submitReturn.setAttribute("name", `${book.isnb}`);
+        // submitReturn.setAttribute("name", `${book.isnb}`);
+        returnForm.appendChild(inputID);
+        returnForm.appendChild(submitReturn);
         availability.appendChild(header);
-        availability.appendChild(submitReturn);
+        availability.appendChild(returnForm);
       }
 
       row.appendChild(availability);
@@ -111,5 +131,24 @@ search.addEventListener("click", function(e) {
   request("/books", returnFiltered);
   e.preventDefault();
 });
+
+// THIS IS A SORTING FUNCTION
+
+function dynamicSort(property) {
+  var sortOrder = 1;
+
+  if (property[0] === "-") {
+    sortOrder = -1;
+    property = property.substr(1);
+  }
+
+  return function(a, b) {
+    if (sortOrder == -1) {
+      return b[property].localeCompare(a[property]);
+    } else {
+      return a[property].localeCompare(b[property]);
+    }
+  };
+}
 
 request("/books", updateBooksListDom);
