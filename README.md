@@ -29,23 +29,43 @@ Run the test command
 ```console
 > npm test
 ```
+![](https://media.giphy.com/media/l0HlMEi55YsfXyzMk/giphy.gif)
+## user journey
 
+As a member of Founders & Coders who has a book I would like to share...
+
+* I can add a book to the database
+As a member of Founders & Coders who is interested in borrowing a book...
+
+I can browse for available books
+* I can reserve a book for certain dates
+* I can unreserve a book
 
 ## our process:
 
-* Set up project architecture
-* Set up a server
-* Set up a database
-* Host on Heroku incl database
-* Display the list of books from DB in DOM (+availability)
-* Add search by title
-* Add a book on client side
-* Borrow  - return mechanics 
-* CSS
-* Tests
+- [x] Set up project architecture
+* We were considering making 2 tables in our database, but ended up making three: Students, Books and Bookings
+- [x] Set up a server
+- [x] Set up a database
+- [x] Host on Heroku incl database
+- [x] Display the list of books from DB in DOM (+availability)
+- [x] Add search by title
+- [x] Add a book on client side
+- [x] Borrow  - return mechanics 
+- [x] CSS
+- [ ] Tests
 
 Stretch goals:
 
-* Autocomplete
-* Several reservations per book
-* Codecov and Travis
+- [ ] Autocomplete
+- [ ] Several reservations per book
+- [ ] Codecov and Travis
+
+## new stuff we've learned
+
+* POST and GET requests to the server on a project with a database
+* Made it working with XMLHttpRequest method 
+* Hosting a DB on Heroku
+* Protected out inputs against script injections
+
+![](http://giphygifs.s3.amazonaws.com/media/GYU7rBEQtBGfe/giphy.gif)
